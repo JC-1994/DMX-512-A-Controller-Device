@@ -103,11 +103,6 @@ uint16_t DeviceAddress = 1;                     // address used to access this d
 // Subroutines
 //**************************************************************************
 
-// DG BE CONSISTENT AND MAKE SURE THAT ALL FUNCTIONS HAVE A FUNCTION HEADER
-// WHICH DESCIBES FUNCTION PURPOSE, PARAMETER DESCRIPTIONS, RETURN VALUE,
-// ANY ASSUMPTIONS, ETC.
-// DON'T DO IT FOR SOME FUNCTIONS BUT NOT OTHERS.
-
 //************************************************************************
 // send a char to the terminal
 // inputs:
@@ -207,7 +202,7 @@ void initHw(void)
     while(!SysCtlPeripheralReady(SYSCTL_PERIPH_EEPROM0));
     ui32EEPROMInit = EEPROMInit();
 
-    if(EEPROM_INIT_ERROR == ui32EEPROMInit)  // DG TRY TO PUT CONSTANT VALUE BEFORE THE == AS THIS GUARDS AGAINST ACCIDENTAL =
+    if(EEPROM_INIT_ERROR == ui32EEPROMInit)
     {
         putsUart0("EEPROM ERROR \r\n");
         while(1);  // continous loop so can debug error
@@ -228,7 +223,7 @@ void initHw(void)
     EEPROMRead(&eepromData,DEVICE_ADDRESS_SETTING,DEVICE_ADDRESS_SETTING_LENGTH);
     DeviceAddress = eepromData;
 
-    // DG CONSIDER LINKIN UP THE = SYMBOLS TO MAKE THE ASSIGNMENTS EASIER TO SKIM DOWN
+
     // set up timer 1:
     SYSCTL_RCGCTIMER_R |= SYSCTL_RCGCTIMER_R1;    // turn on timer
     TIMER1_CTL_R       &= ~TIMER_CTL_TAEN;        // turn off timer before configure
@@ -581,7 +576,7 @@ void processData(void)
         DeviceAddress = 1;
     }
 
-    if(RxDmxData[DeviceAddress-1] < BLUE_ON_RANGE) // DG AVOID USE OF "MAGIC NUMBERS" IN FAVOUR OF #DEFINED VALUES. BUT IF KEPT EXPLAIN FULLY WITH A COMMENT.
+    if(RxDmxData[DeviceAddress-1] < BLUE_ON_RANGE)
     {
         BLUE_LED = 0;
     }
@@ -616,7 +611,7 @@ void configUart1(void)
     UART1_FBRD_R = 0;  // uart fractional baud rate divisor
 
 
-    if(true == ControllerMode)  // DG TRY TO PUT LITERAL/CONSTANT VALUES BEFORE THE == RATHER THAN AFTER THE == AS THIS GUARDS AGAINST ACCIDENTAL USE OF = INSTEAD OF ==
+    if(true == ControllerMode)
     {
         // ENABLE UART1 ON PIN BASED ON DMX512-A PROTOCOL
         // want 8 bit data, 1 startbit and 2 stop bits (line control register length = 8)
@@ -721,7 +716,7 @@ void Uart1Isr(void)
 
         }
 
-    } // DG TRY TO AVOID FUNCTIONS WITH MANY LEVELS OF {}. BUT IF NECESSARY THEN CONSIDER PUTTING A COMMENT AFTER THE } TO MAKE IT OBVIOUS WHICH { IT CORRESPONDS TO; E.G. } // END-IF, } // END-WHILE, ETC
+    }
 }
 
 //**************************************************************************
@@ -1021,7 +1016,6 @@ bool deviceModeService(char input[], uint8_t fieldCount, uint8_t pos[], uint8_t 
 
 void main(void)
 {
-    // DG CONSIDER LINING UP THE 1ST LETTER OF THE VARIABLE NAMES INTO THE SAME COLUMN. SAME FOR THE = SYMBOL.
     char    input[MAX_CHARS + 1];    // add 1 for terminating null
     char    type[MAX_CHARS];         // type of important stuff in array
     uint8_t pos[MAX_CHARS];          // position of important stuff in array
