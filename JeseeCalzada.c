@@ -250,6 +250,8 @@ void initHw(void)
 // elapse approximately 1 microsecond of time
 // inputs:
 //   us number of microseconds to wait
+// outputs:
+//   none
 //**************************************************************************
 
 void waitMicrosecond(uint32_t us)
@@ -413,7 +415,7 @@ void parseStringUart0(char *str, uint8_t pos[], uint8_t *fieldCount,char type[],
 //   fieldCount number of important information in userInput, size of pos[] or type[]
 //   argIndex index of where the arguements begin in userInput
 //   inputSize size of userInput
-// returns:
+// outputs:
 //   bool value true or false
 //**************************************************************************
 
@@ -440,14 +442,17 @@ bool isCommand(char *cmdName, uint8_t numArgs,char *userInput, uint8_t fieldCoun
 }
 
 //**************************************************************************
-// returns interger value from string based on argNum
+// returns integer value from string based on argNum
 // inputs:
-//   argNum is which arguement to get from string
+//   argNum is which argument to get from string
 //   string is user input
+// outputs:
+//   interger number
+//**************************************************************************
 
 uint16_t getValue(uint8_t argNum, char *string)
 {
-   // send part of string starting at where the arguement begins
+   // send part of string starting at where the argument begins
    return atoi(&(string[argNum]));
 
 }
@@ -459,7 +464,7 @@ uint16_t getValue(uint8_t argNum, char *string)
 //   num number to convert to string
 //   *str string to hold output
 //   length of str
-// outputs
+// outputs:
 //   str string of converted number
 //**************************************************************************
 
@@ -502,7 +507,7 @@ void myitoa(uint16_t num, char *str, uint8_t length)
 // load timer1 with a value
 // inputs:
 //   TimeValue to load
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -517,7 +522,7 @@ void loadTimer1(uint32_t TimeValue)
 // turn off uart 1
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -531,7 +536,7 @@ void disableUart1(void)
 // starts transmission of data in controller mode
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -565,7 +570,7 @@ void startDataTransmission(void)
 // receiving data around 1600 clocks
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -590,7 +595,7 @@ void processData(void)
 // configure uart1 for transmission or receiving
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -653,7 +658,7 @@ void configUart1(void)
 // uart1 function to transmit data up to max address
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -723,7 +728,7 @@ void Uart1Isr(void)
 // when timer reachs 0 it will jump to here must be configured in startup_ccs.c
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -752,7 +757,7 @@ void Timer1Isr(void)
 // configured for 200ms interrupts used for blinking leds
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -795,7 +800,7 @@ void Timer2Isr(void)
 // runs startup code for the microcontroller
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
@@ -819,7 +824,7 @@ void startUpService(void)
 //   fieldCount size of pos array
 //   pos[] position of important stuff in input
 //   sizeOfInput length of input including terminating null
-// outputs
+// outputs:
 //   whether a command was executed or not
 //**************************************************************************
 bool controllerModeService(char input[], uint8_t fieldCount, uint8_t pos[], uint8_t sizeOfInput)
@@ -947,7 +952,7 @@ bool controllerModeService(char input[], uint8_t fieldCount, uint8_t pos[], uint
 //   fieldCount size of pos array
 //   pos[] position of important stuff in input
 //   sizeOfInput length of input including terminating null
-// outputs
+// outputs:
 //   whether a command was executed or not
 //**************************************************************************
 
@@ -1010,7 +1015,7 @@ bool deviceModeService(char input[], uint8_t fieldCount, uint8_t pos[], uint8_t 
 // Main starting point of program
 // inputs:
 //   none
-// outputs
+// outputs:
 //   none
 //**************************************************************************
 
